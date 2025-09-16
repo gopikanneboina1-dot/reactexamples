@@ -1,0 +1,234 @@
+/* Cart.css */
+
+.cart-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.cart-title {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.cart-layout {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+/* LEFT: Cart Items */
+.cart-items {
+  flex: 2;
+}
+
+.cart-items ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 15px;
+  background-color: #fdfdfd;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.cart-item-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 15px;
+}
+
+.cart-item-details {
+  flex: 1;
+}
+
+.cart-actions button {
+  margin-right: 8px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #3498db;
+  color: white;
+  transition: background 0.3s ease;
+}
+
+.cart-actions button:hover {
+  background-color: #217dbb;
+}
+
+/* RIGHT: Summary */
+.cart-summary {
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  background-color: #fafafa;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.cart-summary h3, 
+.cart-summary h2 {
+  margin: 10px 0;
+}
+
+.invalid-coupon {
+  color: red;
+}
+
+.discount-buttons {
+  margin: 15px 0;
+  display: flex;
+  flex-wrap: wrap; /* ✅ so buttons wrap on small screens */
+  gap: 12px;       /* ✅ adds equal spacing between all buttons */
+}
+
+.discount-buttons button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #27ae60;
+  color: white;
+  transition: background 0.3s ease;
+}
+
+
+.discount-buttons button:hover {
+  background-color: #1e8449;
+}
+
+.coupon-section {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* ✅ equal gap between input and button */
+  margin-top: 15px;
+}
+
+.coupon-input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  flex: 1; /* ✅ makes input expand to available space */
+}
+
+.apply-btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background-color: #e67e22;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.apply-btn:hover {
+  background-color: #cf711f;
+}
+
+/* Payment method buttons */
+.payment-method {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.payment-method h3 {
+  margin-bottom: 12px;
+  color: #333;
+}
+
+.payment-method button {
+  margin: 5px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* QR button */
+.payment-method button:first-child {
+  background: #ff9800;
+  color: white;
+}
+
+.payment-method button:first-child:hover {
+  background: #e68900;
+  transform: scale(1.05);
+}
+
+/* Card button */
+.payment-method button:last-child {
+  background: #4caf50;
+  color: white;
+}
+
+.payment-method button:last-child:hover {
+  background: #388e3c;
+  transform: scale(1.05);
+}
+
+/* QR Section */
+.qr-section {
+  margin-top: 20px;
+  padding: 20px;
+  text-align: center;
+  border: 2px dashed #ff9800;
+  border-radius: 12px;
+  background: #fff7e6;
+}
+
+.qr-section h4 {
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  color: #e65100;
+}
+
+.qr-section p {
+  margin-top: 12px;
+  font-weight: bold;
+  color: #333;
+}
+
+.qr-section .complete-btn {
+  margin-top: 15px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  background: #4caf50;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.qr-section .complete-btn:hover {
+  background: #388e3c;
+  transform: scale(1.05);
+}
+
+/* Card Section */
+.card-section {
+  margin-top: 20px;
+  padding: 20px;
+  text-align: center;
+  border: 2px solid #4caf50;
+  border-radius: 12px;
+  background: #e8f5e9;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #2e7d3b;
+}
+

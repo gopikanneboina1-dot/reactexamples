@@ -1,0 +1,70 @@
+
+/* Center the card */
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #fff;
+}
+
+/* Card box */
+.signup-card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* Heading */
+.signup-card h2 {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Inputs */
+.signup-card input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+/* Input focus */
+.signup-card input:focus {
+  outline: none;
+  border-color: #0d6efd;
+  box-shadow: 0 0 5px rgba(13, 110, 253, 0.3);
+}
+
+/* Error text */
+.error {
+  color: red;
+  font-size: 13px;
+  margin-top: -8px;
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+/* Button */
+.signup-card button {
+  width: 100%;
+  padding: 12px;
+  background: #ffc107;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  color: #000;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.signup-card button:hover {
+  background: #e0a800;
+}
