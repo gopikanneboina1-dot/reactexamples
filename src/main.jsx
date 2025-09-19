@@ -7,6 +7,7 @@ import './index.css';
 import App from './App.jsx';
 import store from './store.js';
 
+
 const root = createRoot(document.getElementById('root'));
 
 root.render(
