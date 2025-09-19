@@ -6,7 +6,7 @@ import {
   removeFromCart,
   clearCart,
   addOrder,
-} from "./store";
+} from "./Store";
 import {
   applyDiscount,
   calculateTotal,

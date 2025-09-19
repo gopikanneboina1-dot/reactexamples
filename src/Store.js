@@ -1,5 +1,4 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
-import Orders from "./Orders";
 
 const prodSlice = createSlice({
   name: "products",
@@ -108,7 +107,7 @@ const OrderSlice = createSlice({
 
 })
 // Step 3: Configure store
-const store = configureStore({
+const Store = configureStore({
   reducer: {
     products: prodSlice.reducer, // ✅ Correct slice name
     Cart: cardSlice.reducer,
@@ -119,4 +118,4 @@ const store = configureStore({
 export const {addToCart, incrementQuantity, decrementQuantity, removeFromCart, clearCart } = cardSlice.actions;
 export const  {addOrder} = OrderSlice.actions;
 
-export default store;
+export default Store;
