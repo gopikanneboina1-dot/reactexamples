@@ -8,7 +8,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import Home from "./Home";
 import AboutUs from "./AboutUs";
 import Veg from "./Veg";
-import Nonveg from "./Nonveg";
+import NonVeg from "./NonVeg";
 import Drinks from "./Dairy";
 import Contact from "./Contacts";
 import Orders from "./Orders";
@@ -104,7 +104,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/veg" element={<Veg />} />
-          <Route path="/nonveg" element={<Nonveg />} />
+          <Route path="/nonveg" element={<NonVeg />} />
           <Route path="/drinks" element={<Drinks />} />
           <Route path="/contactus" element={<Contact />} />
           <Route path="/orders" element={<Orders />} />
