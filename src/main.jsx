@@ -1,18 +1,13 @@
-import React from 'react';
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
-import './index.css';
-import App from './App.jsx';
-import Store from './Store.js';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App";
+import "./index.css"; // or your global CSS
 
-
-const root = createRoot(document.getElementById('root'));
-
-root.render(
-  <StrictMode>
-    <Provider store={Store}>
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <BrowserRouter>
       <App />
-    </Provider>
-  </StrictMode>
+    </BrowserRouter>
+  </React.StrictMode>
 );
