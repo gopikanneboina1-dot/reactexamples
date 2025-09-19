@@ -4,14 +4,13 @@ import { addToCart } from './store';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast, ToastContainer } from 'react-toastify';
 import './NonVeg.css'; // Import CSS file
-
 function NonVeg() {
   const nonVegItems = useSelector(state => state.products.nonVeg);
   const dispatch = useDispatch();
 
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8; 
+  const itemsPerPage = 10; 
 
   // Calculate indexes
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -35,7 +34,7 @@ function NonVeg() {
               <div className="nonveg-info">
                 <strong className="nonveg-name">{item.name}</strong>
                 <p className="nonveg-price">₹{item.price}</p>
-                <p className="nonveg-description">{item.description}</p>
+                
                 <button
                   className="add-btn"
                   onClick={() => {

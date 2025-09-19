@@ -11,7 +11,7 @@ function Dairy() {
 
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8;
+  const itemsPerPage = 10;
 
   // Calculate indexes
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -34,7 +34,7 @@ function Dairy() {
             <div className="drinks-info">
               <strong className="drinks-name">{item.name}</strong>
               <p className="drinks-price">₹{item.price}</p>
-              <p className="drinks-description">{item.description}</p>
+             
               <button
                 className="add-btn"
                 onClick={() => {

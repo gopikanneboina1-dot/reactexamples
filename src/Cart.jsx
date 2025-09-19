@@ -12,9 +12,13 @@ import {
   calculateTotal,
   getCouponDiscount,
 } from "./discountUtils";
-import { QRCodeCanvas } from "qrcode.react"; // ✅ QR import
+import { QRCodeCanvas } from "qrcode.react";
 import "./Cart.css";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Swal from "sweetalert2"; // ✅ import sweetalert2
+
 
 function Cart() {
   const navigate = useNavigate();
@@ -28,11 +32,7 @@ function Cart() {
     discountPercent: 0,
     discountAmount: 0,
   });
-
-  const [paymentMethod, setPaymentMethod] = useState(""); // payment selection
-
-  
-  
+  const [paymentMethod, setPaymentMethod] = useState("");
 
   const totalPrice = calculateTotal(cartItems);
   const discountedPrice = applyDiscount(totalPrice, discountRate);
@@ -45,6 +45,20 @@ function Cart() {
   const handleApplyCoupon = () => {
     const result = getCouponDiscount(couponcode, totalPrice);
     setCouponResult(result);
+    if (result.isValid) {
+      toast.success(`🎉 Coupon "${couponcode}" applied!`);
+    } else {
+      toast.error("❌ Invalid coupon code");
+    }
+  };
+
+  const handleDiscount = (rate) => {
+    setDiscountRate(rate);
+    if (rate === 0) {
+      toast.info("Discount removed");
+    } else {
+      toast.success(`✅ ${rate}% discount applied`);
+    }
   };
 
   const handleCompletePurchase = () => {
@@ -52,7 +66,7 @@ function Cart() {
       id: Date.now(),
       date: new Date().toLocaleString(),
       items: [...cartItems],
-      totalPrice: totalPrice,
+      totalPrice,
       discountRate,
       coupon: couponResult,
       couponcode,
@@ -60,15 +74,28 @@ function Cart() {
     };
     dispatch(addOrder(purchaseDetails));
     dispatch(clearCart());
-    alert("✅ Order placed successfully!");
-    navigate('/orders')
-  };
 
+    // ✅ SweetAlert2 popup instead of alert/toast
+    Swal.fire({
+      title: "Payment Successful 🎉",
+      text: "Thank you for your purchase! Your order has been placed.",
+      icon: "success",
+      confirmButtonText: "OK",
+      confirmButtonColor: "#28a745",
+    }).then(() => {
+      navigate("/orders"); // redirect after closing popup
+    });
+
+    
+  };
   
+
+
 
   return (
     <div className="cart-container">
       <h2 className="cart-title">🛒 Your Cart</h2>
+      <ToastContainer position="top-right" autoClose={2000} />
 
       {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>
@@ -108,29 +135,20 @@ function Cart() {
 
           {/* RIGHT: Summary */}
           <div className="cart-summary">
-            <h3>Total: ₹{totalPrice.toFixed(2)}</h3>
-            <h3>Discounted Total: ₹{discountedPrice.toFixed(2)}</h3>
+            <h3>💰 Price Details</h3>
+            <p>Total: ₹{totalPrice.toFixed(2)}</p>
+            <p>Discounted Total: ₹{discountedPrice.toFixed(2)}</p>
 
+            <hr />
+            <h3>🏷️ Coupon</h3>
             {couponResult.isValid ? (
-              <h3>
-                Coupon "{couponcode}" applied {couponResult.discountPercent}% Off
-                : ₹{couponResult.discountAmount}
-              </h3>
+              <p>
+                Coupon "{couponcode}" applied {couponResult.discountPercent}% Off: ₹
+                {couponResult.discountAmount}
+              </p>
             ) : (
-              couponcode && <h3 className="invalid-coupon">Invalid Coupon</h3>
+              couponcode && <p className="invalid-coupon">Invalid Coupon</p>
             )}
-
-            <h2>Net Total: ₹{finalTotal.toFixed(2)}</h2>
-
-            {/* Discount buttons */}
-            <div className="discount-buttons">
-              <button onClick={() => setDiscountRate(10)}>10% Discount</button>
-              <button onClick={() => setDiscountRate(20)}>20% Discount</button>
-              <button onClick={() => setDiscountRate(30)}>30% Discount</button>
-              <button onClick={() => setDiscountRate(0)}>Remove Discount</button>
-            </div>
-
-            {/* Coupon */}
             <div className="coupon-section">
               <input
                 type="text"
@@ -140,29 +158,37 @@ function Cart() {
                 className="coupon-input"
               />
               <button onClick={handleApplyCoupon} className="apply-btn">
-                Apply Coupon
+                Apply
               </button>
             </div>
 
-            
+            <hr />
+            <h3>💸 Apply Discount</h3>
+            <div className="discount-buttons">
+              <button onClick={() => handleDiscount(10)}>10%</button>
+              <button onClick={() => handleDiscount(20)}>20%</button>
+              <button onClick={() => handleDiscount(30)}>30%</button>
+              <button onClick={() => handleDiscount(0)}>Remove</button>
+            </div>
 
-            {/* Payment Method */}
+            <hr />
+            <h2>Net Total: ₹{finalTotal.toFixed(2)}</h2>
+
+              
+
+            <hr />
+            <h3>💳 Select Payment Method</h3>
             <div className="payment-method">
-              <h3>Select Payment Method</h3>
               <button onClick={() => setPaymentMethod("qr")}>QR Code</button>
               <button onClick={() => setPaymentMethod("card")}>Card</button>
             </div>
 
-            {/* QR Section */}
             {paymentMethod === "qr" && (
               <div className="qr-section">
                 <h4>Scan UPI QR to pay ₹{finalTotal.toFixed(2)}</h4>
                 <QRCodeCanvas value={upiLink} size={220} includeMargin={true} />
                 <p>UPI ID: 9347143166@ybl</p>
-                <button
-                  onClick={handleCompletePurchase}
-                  className="complete-btn"
-                >
+                <button onClick={handleCompletePurchase} className="complete-btn">
                   ✅ I Have Paid
                 </button>
               </div>

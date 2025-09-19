@@ -11,7 +11,7 @@ function Veg() {
 
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8; 
+  const itemsPerPage = 10; 
 
   // Calculate indexes
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -35,7 +35,7 @@ function Veg() {
             <div className="veg-info">
               <strong className="veg-name">{item.name}</strong>
               <p className="veg-price">₹{item.price}</p>
-              <p className="veg-description">{item.description}</p>
+              
               <button
                 className="add-btn"
                 onClick={() => {

@@ -1,90 +1,48 @@
-import React, { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useRef } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./Signin.css"; // reuse same styles as SignUp
+import "./Signup.css";
 
-function Login() {
-  const usernameref = useRef(null);
-  const passwordref = useRef(null);
+function Signin({ setIsLoggedIn, setUser }) {
+  const usernameRef = useRef(null);
+  const passwordRef = useRef(null);
   const navigate = useNavigate();
 
-  const [usernamerror, setUsernamerror] = useState("");
-  const [passworderror, setPassworderror] = useState("");
-
-  const handleLogin = (e) => {
+  const handleSignin = (e) => {
     e.preventDefault();
+    const username = usernameRef.current.value;
+    const password = passwordRef.current.value;
 
-    // Reset errors
-    setUsernamerror("");
-    setPassworderror("");
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const user = users.find(u => u.username === username && u.password === password);
 
-    // Validation
-    if (!usernameref.current.value) {
-      setUsernamerror("Username is required");
-      usernameref.current.focus();
-      return;
-    }
-    if (!passwordref.current.value) {
-      setPassworderror("Password is required");
-      passwordref.current.focus();
-      return;
-    }
-
-    // Check credentials
-    if (
-      usernameref.current.value === "admin" &&
-      passwordref.current.value === "admin"
-    ) {
-      toast.success("Login Successful ✅", {
-        position: "top-right",
-        autoClose: 1500,
-      });
-      setTimeout(() => {
-        navigate("/"); // redirect to home
-      }, 1600);
+    if (user) {
+      toast.success(`Welcome back, ${user.username}! ✅`, { position: "top-right", autoClose: 1500 });
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("loggedInUser", user.username);
+      setIsLoggedIn(true);
+      setUser(user.username);
+      setTimeout(() => navigate("/cart"), 1600);
     } else {
-      toast.error("Invalid Credentials ❌", {
-        position: "top-right",
-        autoClose: 2000,
-      });
+      toast.error("Invalid username or password ❌", { position: "top-right", autoClose: 2000 });
     }
   };
 
   return (
     <div className="signup-container">
-      <form className="signup-form shadow-lg" onSubmit={handleLogin}>
-        <h2 className="text-center mb-4">Sign In</h2>
-
-        <input
-          type="text"
-          ref={usernameref}
-          placeholder="Username"
-          className="form-control mb-2"
-        />
-        {usernamerror && (
-          <div className="alert alert-danger">{usernamerror}</div>
-        )}
-
-        <input
-          type="password"
-          ref={passwordref}
-          placeholder="Password"
-          className="form-control mb-2"
-        />
-        {passworderror && (
-          <div className="alert alert-danger">{passworderror}</div>
-        )}
-
-        <button type="submit" className="btn btn-warning w-100">
-          Login
-        </button>
+      <form className="signup-card" onSubmit={handleSignin}>
+        <h2>Sign In</h2>
+        <input type="text" placeholder="Username" ref={usernameRef} required />
+        <input type="password" placeholder="Password" ref={passwordRef} required />
+        <button type="submit">Sign In</button>
+        <p className="p-3">
+          Don't have an account? <Link to="/signup">Sign Up</Link>
+        </p>
       </form>
-
-      {/* Toast container */}
       <ToastContainer />
     </div>
   );
 }
 
-export default Login;
+export default Signin;

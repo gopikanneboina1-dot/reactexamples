@@ -5,7 +5,6 @@ import "slick-carousel/slick/slick-theme.css";
 import "./Home.css";
 import { Truck, BadgeCheck, Headphones } from "lucide-react";
 
-
 function Home() {
   const settings = {
     dots: true,
@@ -18,9 +17,9 @@ function Home() {
   };
 
   const carouselItems = [
-    { title: "Veg Dishes", img: "/veg banner.png" },
+    { title: "Veg Dishes", img: "/Veg banner.png" },
     { title: "Non-Veg Dishes", img: "/Non veg banner.png" },
-    {title: "Dairy Items",img: "/Milkbanner.png",},
+    { title: "Dairy Items", img: "/Milkbanner.png" },
   ];
 
   const cardItems = [
@@ -39,8 +38,29 @@ function Home() {
     {
       title: "Dairy Items",
       description:
-        "Fresh Dairy items will be delivered and they are good in Protiens.",
+        "Fresh Dairy items will be delivered and they are good in Proteins.",
       img: "milkcard.png",
+    },
+  ];
+
+  const serviceItems = [
+    {
+      title: "Free Delivery",
+      description:
+        "Enjoy hassle-free shopping with fast and free delivery on every order. We ensure your fresh products reach your doorstep quickly and in perfect condition, without any extra charges.",
+      icon: <Truck size={50} />,
+    },
+    {
+      title: "Good Quality",
+      description:
+        "We are committed to providing only the best quality products. Every item is carefully selected, fresh, and hygienically packed to guarantee premium standards and customer satisfaction.",
+      icon: <BadgeCheck size={50} />,
+    },
+    {
+      title: "24/7 Support",
+      description:
+        "Our friendly customer support team is available around the clock to assist you. Whether you need help with an order, have a query, or need recommendations, we’re here for you anytime.",
+      icon: <Headphones size={50} />,
     },
   ];
 
@@ -58,57 +78,39 @@ function Home() {
         </Slider>
       </div>
 
-      {/* Cards Section */}
+      {/* Categories Section */}
       <div className="categories-section">
-      <h2 className="services-heading">Categories</h2>
-      <div className="cards-container">
-        {cardItems.map((card, index) => (
-          <div key={index} className="card">
-            <img src={card.img} alt={card.title} className="card-img" />
-            <div className="card-body">
-              <h3 className="card-title">{card.title}</h3>
-              <p className="card-description">{card.description}</p>
+        <h2 className="services-heading">Categories</h2>
+        <div className="cards-container">
+          {cardItems.map((card, index) => (
+            <div key={index} className="card">
+              <img src={card.img} alt={card.title} className="card-img" />
+              <div className="card-body">
+                <h3 className="card-title">{card.title}</h3>
+                <p className="card-description">{card.description}</p>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
       </div>
 
       {/* Services Section */}
-
-
-<div className="services-section">
-  <h2 className="services-heading">🌟 Our Services</h2>
-  <div className="services-cards">
-    <div className="service-card">
-      <Truck size={50} className="service-icon" />
-      <h3 className="service-title">Free Delivery</h3>
-      <p className="service-description">
-        Enjoy hassle-free shopping with fast and free delivery on every order. We ensure your fresh products reach your doorstep quickly and in perfect condition, without any extra charges.
-      </p>
-    </div>
-
-    <div className="service-card">
-      <BadgeCheck size={50} className="service-icon" />
-      <h3 className="service-title">Good Quality</h3>
-      <p className="service-description">
-        We are committed to providing only the best quality products. Every item is carefully selected, fresh, and hygienically packed to guarantee premium standards and customer satisfaction.
-      </p>
-    </div>
-
-    <div className="service-card">
-      <Headphones size={50} className="service-icon" />
-      <h3 className="service-title">24/7 Support</h3>
-      <p className="service-description">
-        Our friendly customer support team is available around the clock to assist you. Whether you need help with an order, have a query, or need recommendations, we’re here for you anytime.
-      </p>
-    </div>
-  </div>
-</div>
-
-
-
-
+      <div className="categories-section">
+        <h2 className="services-heading">🌟 Our Services</h2>
+        <div className="cards-container">
+          {serviceItems.map((service, index) => (
+            <div key={index} className="card">
+              <div className="card-img" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "150px" }}>
+                {service.icon}
+              </div>
+              <div className="card-body">
+                <h3 className="card-title">{service.title}</h3>
+                <p className="card-description">{service.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
